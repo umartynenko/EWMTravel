@@ -1,0 +1,496 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F80F97252C0CBC32000E66BA /* EWMTravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F97242C0CBC32000E66BA /* EWMTravelApp.swift */; };
+		F80F97272C0CBC32000E66BA /* EWMTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F97262C0CBC32000E66BA /* EWMTravelView.swift */; };
+		F80F97292C0CBC33000E66BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80F97282C0CBC33000E66BA /* Assets.xcassets */; };
+		F80F972C2C0CBC33000E66BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80F972B2C0CBC33000E66BA /* Preview Assets.xcassets */; };
+		F80F97342C0CBC71000E66BA /* Earthquake.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F97332C0CBC71000E66BA /* Earthquake.swift */; };
+		F80F97372C0CBCD7000E66BA /* EarthquakeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F97362C0CBCD7000E66BA /* EarthquakeAnnotationView.swift */; };
+		F80F973A2C0CBD02000E66BA /* EarthquakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80F97392C0CBD02000E66BA /* EarthquakeViewModel.swift */; };
+		F8126B252C0FB6DF007E4891 /* FireData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8126B242C0FB6DF007E4891 /* FireData.swift */; };
+		F8126B272C0FB976007E4891 /* FireDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8126B262C0FB976007E4891 /* FireDataViewModel.swift */; };
+		F8126B292C0FC124007E4891 /* FireAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8126B282C0FC124007E4891 /* FireAnnotationView.swift */; };
+		F8E43DA32C16361E0092CCE5 /* GlitchText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E43DA02C16361E0092CCE5 /* GlitchText.swift */; };
+		F8E43DA72C1636800092CCE5 /* ScreensaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E43DA62C1636800092CCE5 /* ScreensaverView.swift */; };
+		F8F50EF12C1CB248002F18A8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F8F50EF02C1CB248002F18A8 /* FirebaseAuth */; };
+		F8F50EF42C1CB279002F18A8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = F8F50EF32C1CB279002F18A8 /* Lottie */; };
+		F8F50EF62C229D14002F18A8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F50EF52C229D14002F18A8 /* Login.swift */; };
+		F8F50EF82C22A1F3002F18A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F50EF72C22A1F3002F18A8 /* GoogleService-Info.plist */; };
+		F8F50EFA2C24AC68002F18A8 /* EmailAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F50EF92C24AC68002F18A8 /* EmailAnimation.json */; };
+		F8F50EFD2C24B9AF002F18A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F50EFC2C24B9AF002F18A8 /* ContentView.swift */; };
+		F8F50EFF2C24BADF002F18A8 /* GlobeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = F8F50EFE2C24BADF002F18A8 /* GlobeAnimation.json */; };
+		F8F50F012C24BC48002F18A8 /* ReusableFunctionsApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F50F002C24BC48002F18A8 /* ReusableFunctionsApplication.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F80F97212C0CBC32000E66BA /* EWMTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EWMTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80F97242C0CBC32000E66BA /* EWMTravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EWMTravelApp.swift; sourceTree = "<group>"; };
+		F80F97262C0CBC32000E66BA /* EWMTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EWMTravelView.swift; sourceTree = "<group>"; };
+		F80F97282C0CBC33000E66BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F80F972B2C0CBC33000E66BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F80F97332C0CBC71000E66BA /* Earthquake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Earthquake.swift; sourceTree = "<group>"; };
+		F80F97362C0CBCD7000E66BA /* EarthquakeAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthquakeAnnotationView.swift; sourceTree = "<group>"; };
+		F80F97392C0CBD02000E66BA /* EarthquakeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthquakeViewModel.swift; sourceTree = "<group>"; };
+		F8126B242C0FB6DF007E4891 /* FireData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireData.swift; sourceTree = "<group>"; };
+		F8126B262C0FB976007E4891 /* FireDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireDataViewModel.swift; sourceTree = "<group>"; };
+		F8126B282C0FC124007E4891 /* FireAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAnnotationView.swift; sourceTree = "<group>"; };
+		F8E43D7E2C14E5E60092CCE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F8E43D7F2C14E62E0092CCE5 /* EWMTravelDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EWMTravelDebug.entitlements; sourceTree = "<group>"; };
+		F8E43DA02C16361E0092CCE5 /* GlitchText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlitchText.swift; sourceTree = "<group>"; };
+		F8E43DA62C1636800092CCE5 /* ScreensaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreensaverView.swift; sourceTree = "<group>"; };
+		F8F50EF52C229D14002F18A8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		F8F50EF72C22A1F3002F18A8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F8F50EF92C24AC68002F18A8 /* EmailAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmailAnimation.json; sourceTree = "<group>"; };
+		F8F50EFC2C24B9AF002F18A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F8F50EFE2C24BADF002F18A8 /* GlobeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GlobeAnimation.json; sourceTree = "<group>"; };
+		F8F50F002C24BC48002F18A8 /* ReusableFunctionsApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableFunctionsApplication.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F80F971E2C0CBC32000E66BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8F50EF12C1CB248002F18A8 /* FirebaseAuth in Frameworks */,
+				F8F50EF42C1CB279002F18A8 /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F80F97182C0CBC32000E66BA = {
+			isa = PBXGroup;
+			children = (
+				F80F97232C0CBC32000E66BA /* EWMTravel */,
+				F80F97222C0CBC32000E66BA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F80F97222C0CBC32000E66BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F80F97212C0CBC32000E66BA /* EWMTravel.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F80F97232C0CBC32000E66BA /* EWMTravel */ = {
+			isa = PBXGroup;
+			children = (
+				F8F50EF72C22A1F3002F18A8 /* GoogleService-Info.plist */,
+				F8F50EFB2C24ACA3002F18A8 /* Lottie */,
+				F8E43DA12C16361E0092CCE5 /* Helpers */,
+				F8E43D7F2C14E62E0092CCE5 /* EWMTravelDebug.entitlements */,
+				F8E43D7E2C14E5E60092CCE5 /* Info.plist */,
+				F80F97382C0CBCF7000E66BA /* ViewModels */,
+				F80F97352C0CBC9F000E66BA /* View */,
+				F80F97322C0CBC59000E66BA /* Models */,
+				F80F97242C0CBC32000E66BA /* EWMTravelApp.swift */,
+				F80F97282C0CBC33000E66BA /* Assets.xcassets */,
+				F80F972A2C0CBC33000E66BA /* Preview Content */,
+				F8F50F002C24BC48002F18A8 /* ReusableFunctionsApplication.swift */,
+			);
+			path = EWMTravel;
+			sourceTree = "<group>";
+		};
+		F80F972A2C0CBC33000E66BA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F80F972B2C0CBC33000E66BA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F80F97322C0CBC59000E66BA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F80F97332C0CBC71000E66BA /* Earthquake.swift */,
+				F8126B242C0FB6DF007E4891 /* FireData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F80F97352C0CBC9F000E66BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F80F97262C0CBC32000E66BA /* EWMTravelView.swift */,
+				F8E43DA62C1636800092CCE5 /* ScreensaverView.swift */,
+				F80F97362C0CBCD7000E66BA /* EarthquakeAnnotationView.swift */,
+				F8126B282C0FC124007E4891 /* FireAnnotationView.swift */,
+				F8F50EF52C229D14002F18A8 /* Login.swift */,
+				F8F50EFC2C24B9AF002F18A8 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F80F97382C0CBCF7000E66BA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F80F97392C0CBD02000E66BA /* EarthquakeViewModel.swift */,
+				F8126B262C0FB976007E4891 /* FireDataViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F8E43DA12C16361E0092CCE5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8E43DA02C16361E0092CCE5 /* GlitchText.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F8F50EFB2C24ACA3002F18A8 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				F8F50EF92C24AC68002F18A8 /* EmailAnimation.json */,
+				F8F50EFE2C24BADF002F18A8 /* GlobeAnimation.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F80F97202C0CBC32000E66BA /* EWMTravel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F80F972F2C0CBC33000E66BA /* Build configuration list for PBXNativeTarget "EWMTravel" */;
+			buildPhases = (
+				F80F971D2C0CBC32000E66BA /* Sources */,
+				F80F971E2C0CBC32000E66BA /* Frameworks */,
+				F80F971F2C0CBC32000E66BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EWMTravel;
+			packageProductDependencies = (
+				F8F50EF02C1CB248002F18A8 /* FirebaseAuth */,
+				F8F50EF32C1CB279002F18A8 /* Lottie */,
+			);
+			productName = EWMTravel;
+			productReference = F80F97212C0CBC32000E66BA /* EWMTravel.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F80F97192C0CBC32000E66BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					F80F97202C0CBC32000E66BA = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = F80F971C2C0CBC32000E66BA /* Build configuration list for PBXProject "EWMTravel" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F80F97182C0CBC32000E66BA;
+			packageReferences = (
+				F8F50EEF2C1CB248002F18A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F8F50EF22C1CB279002F18A8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
+			productRefGroup = F80F97222C0CBC32000E66BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F80F97202C0CBC32000E66BA /* EWMTravel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F80F971F2C0CBC32000E66BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8F50EFA2C24AC68002F18A8 /* EmailAnimation.json in Resources */,
+				F80F972C2C0CBC33000E66BA /* Preview Assets.xcassets in Resources */,
+				F80F97292C0CBC33000E66BA /* Assets.xcassets in Resources */,
+				F8F50EF82C22A1F3002F18A8 /* GoogleService-Info.plist in Resources */,
+				F8F50EFF2C24BADF002F18A8 /* GlobeAnimation.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F80F971D2C0CBC32000E66BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80F97272C0CBC32000E66BA /* EWMTravelView.swift in Sources */,
+				F8126B252C0FB6DF007E4891 /* FireData.swift in Sources */,
+				F8F50F012C24BC48002F18A8 /* ReusableFunctionsApplication.swift in Sources */,
+				F8F50EFD2C24B9AF002F18A8 /* ContentView.swift in Sources */,
+				F80F97342C0CBC71000E66BA /* Earthquake.swift in Sources */,
+				F8E43DA72C1636800092CCE5 /* ScreensaverView.swift in Sources */,
+				F80F97372C0CBCD7000E66BA /* EarthquakeAnnotationView.swift in Sources */,
+				F8126B272C0FB976007E4891 /* FireDataViewModel.swift in Sources */,
+				F8E43DA32C16361E0092CCE5 /* GlitchText.swift in Sources */,
+				F80F973A2C0CBD02000E66BA /* EarthquakeViewModel.swift in Sources */,
+				F80F97252C0CBC32000E66BA /* EWMTravelApp.swift in Sources */,
+				F8F50EF62C229D14002F18A8 /* Login.swift in Sources */,
+				F8126B292C0FC124007E4891 /* FireAnnotationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F80F972D2C0CBC33000E66BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F80F972E2C0CBC33000E66BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F80F97302C0CBC33000E66BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EWMTravel/EWMTravelDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"EWMTravel/Preview Content\"";
+				DEVELOPMENT_TEAM = 29H9G4D6F9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EWMTravel/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = home.EWMTravel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F80F97312C0CBC33000E66BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"EWMTravel/Preview Content\"";
+				DEVELOPMENT_TEAM = 29H9G4D6F9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EWMTravel/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = home.EWMTravel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F80F971C2C0CBC32000E66BA /* Build configuration list for PBXProject "EWMTravel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80F972D2C0CBC33000E66BA /* Debug */,
+				F80F972E2C0CBC33000E66BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F80F972F2C0CBC33000E66BA /* Build configuration list for PBXNativeTarget "EWMTravel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80F97302C0CBC33000E66BA /* Debug */,
+				F80F97312C0CBC33000E66BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F8F50EEF2C1CB248002F18A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.27.0;
+			};
+		};
+		F8F50EF22C1CB279002F18A8 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F8F50EF02C1CB248002F18A8 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8F50EEF2C1CB248002F18A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F8F50EF32C1CB279002F18A8 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8F50EF22C1CB279002F18A8 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F80F97192C0CBC32000E66BA /* Project object */;
+}
