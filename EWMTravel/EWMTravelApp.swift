@@ -28,7 +28,6 @@ struct EWMTravelApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//            Login()
         }
     }
 }

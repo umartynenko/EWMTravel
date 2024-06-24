@@ -1,11 +1,10 @@
 //
-//  ContentView.swift
+//  EWMTravelView.swift
 //  EWMTravel
 //
 //  Created by Юрий Мартыненко on 01.06.2024.
 //
 //
-
 
 import SwiftUI
 import MapKit
@@ -28,6 +27,9 @@ struct EWMTravelView: View {
     @State private var selectedTimePeriodForFire: String = ""
     @State private var isMenuVisible: Bool = false
     @State private var selectedActivityType = ""
+    @State var mapType: MapStyle = .standard(elevation: .realistic)
+    @State var standartType: Bool = true
+    @State private var colorScheme: ColorScheme = .light
     
     @Namespace private var locatonSpace
     
@@ -38,14 +40,12 @@ struct EWMTravelView: View {
         ("earthquakes", "mountain.2", "Землетрясения"),
         ("fires", "flame", "Пожары"),
     ]
-    
     let timePeriodsForEarthquakes = [
         ("1hour", "clock", "1 час"),
         ("1day", "sun.max", "1 день"),
         ("1week", "calendar", "1 неделя"),
         ("1month", "calendar.badge.plus", "1 месяц"),
     ]
-    
     let timePeriodsForFire = [
         ("24h", "clock", "24 часа"),
         ("48h", "clock", "48 часов"),
@@ -126,7 +126,9 @@ struct EWMTravelView: View {
                                                     .scaledToFit()
                                                     .frame(height: 24)
                                                     .padding()
-                                                    .background(selectedTimePeriodForFire == period.0 ? Color.blue : Color.gray)
+                                                    .background(
+                                                        selectedTimePeriodForFire == period.0 ? Color.blue : Color.gray
+                                                    )
                                                     .foregroundColor(.white)
                                                     .clipShape(Circle())
                                                 
@@ -181,14 +183,22 @@ struct EWMTravelView: View {
                         VStack(spacing: 15) {
                             MapPitchToggle(scope: locatonSpace)
                             MapUserLocationButton(scope: locatonSpace)
+                            Button {
+                                switchTypeMap()
+                            } label: {
+                                Image(systemName: standartType ? "map" : "map.fill")
+                                    .font(.system(size: 22))
+                                    .padding(10)
+                                    .background(Color("mapType").opacity(0.9))
+                                    .clipShape(Circle())
+                            }
                         }
                         .buttonBorderShape(.circle)
                         .padding()
                     }
                     .mapScope(locatonSpace)
-                    .mapStyle(.standard(elevation: .realistic))
-                    
-                    
+//                    .mapStyle(.standard(elevation: .realistic))
+                    .mapStyle(mapType)
                     .navigationTitle("EWMTravel")
                     .navigationBarTitleDisplayMode(.inline)
                     .searchable(text: $searchText, isPresented: $showSearch, prompt: "Поиск")
@@ -220,6 +230,7 @@ struct EWMTravelView: View {
                     await searchPlaces()
                 }
             }
+            .preferredColorScheme(colorScheme)
             .onChange(of: showSearch, initial: false) {
                 if (!showSearch) {
                     searchResults.removeAll(keepingCapacity: false)
@@ -290,6 +301,7 @@ struct EWMTravelView: View {
                     
                     Button(action: {
                         showInMaps(selectedPlace)
+                        showInMaps(selectedPlace)
                     }) {
                         Image(systemName: "arrow.turn.up.right")
                             .font(.title3)
@@ -344,7 +356,6 @@ struct EWMTravelView: View {
         
         let latDelta = region.span.latitudeDelta / 2.0
         let lonDelta = region.span.longitudeDelta / 2.0
-        
         let minLat = region.center.latitude - latDelta
         let maxLat = region.center.latitude + latDelta
         let minLon = region.center.longitude - lonDelta
@@ -357,10 +368,22 @@ struct EWMTravelView: View {
     func calculateMarkerSize(for frp: Double) -> CGFloat {
         // Например, предположим, что размер маркера будет пропорционален FRP
         // Чем выше значение FRP, тем больше маркер
-        let baseSize: CGFloat = 10 // Базовый размер маркера
-        let scaleFactor: CGFloat = 0.1 // Масштабный коэффициент, чтобы увеличить или уменьшить маркер в зависимости от FRP
+        let baseSize: CGFloat = 10  // Базовый размер маркера
+        let scaleFactor: CGFloat = 0.1  // Масштабный коэффициент, чтобы увеличить или уменьшить маркер в зависимости от FRP
         
         return baseSize + CGFloat(frp) * scaleFactor
+    }
+    
+    func switchTypeMap() {
+        if standartType {
+            mapType = .hybrid(elevation: .realistic)
+            standartType = false
+            colorScheme = .dark
+        } else {
+            mapType = .standard(elevation: .realistic)
+            standartType = true
+            colorScheme = .light
+        }
     }
 }
 

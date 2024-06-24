@@ -41,7 +41,7 @@
 		F8126B242C0FB6DF007E4891 /* FireData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireData.swift; sourceTree = "<group>"; };
 		F8126B262C0FB976007E4891 /* FireDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireDataViewModel.swift; sourceTree = "<group>"; };
 		F8126B282C0FC124007E4891 /* FireAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireAnnotationView.swift; sourceTree = "<group>"; };
-		F8E43D7E2C14E5E60092CCE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F8E43D7E2C14E5E60092CCE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8E43D7F2C14E62E0092CCE5 /* EWMTravelDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EWMTravelDebug.entitlements; sourceTree = "<group>"; };
 		F8E43DA02C16361E0092CCE5 /* GlitchText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlitchText.swift; sourceTree = "<group>"; };
 		F8E43DA62C1636800092CCE5 /* ScreensaverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreensaverView.swift; sourceTree = "<group>"; };
@@ -86,17 +86,17 @@
 			isa = PBXGroup;
 			children = (
 				F8F50EF72C22A1F3002F18A8 /* GoogleService-Info.plist */,
-				F8F50EFB2C24ACA3002F18A8 /* Lottie */,
-				F8E43DA12C16361E0092CCE5 /* Helpers */,
-				F8E43D7F2C14E62E0092CCE5 /* EWMTravelDebug.entitlements */,
 				F8E43D7E2C14E5E60092CCE5 /* Info.plist */,
+				F8E43D7F2C14E62E0092CCE5 /* EWMTravelDebug.entitlements */,
+				F80F97242C0CBC32000E66BA /* EWMTravelApp.swift */,
+				F83EB2E62C28BD6E00130630 /* MyFunc */,
+				F8E43DA12C16361E0092CCE5 /* Helpers */,
 				F80F97382C0CBCF7000E66BA /* ViewModels */,
 				F80F97352C0CBC9F000E66BA /* View */,
 				F80F97322C0CBC59000E66BA /* Models */,
-				F80F97242C0CBC32000E66BA /* EWMTravelApp.swift */,
 				F80F97282C0CBC33000E66BA /* Assets.xcassets */,
+				F8F50EFB2C24ACA3002F18A8 /* Lottie */,
 				F80F972A2C0CBC33000E66BA /* Preview Content */,
-				F8F50F002C24BC48002F18A8 /* ReusableFunctionsApplication.swift */,
 			);
 			path = EWMTravel;
 			sourceTree = "<group>";
@@ -138,6 +138,14 @@
 				F8126B262C0FB976007E4891 /* FireDataViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F83EB2E62C28BD6E00130630 /* MyFunc */ = {
+			isa = PBXGroup;
+			children = (
+				F8F50F002C24BC48002F18A8 /* ReusableFunctionsApplication.swift */,
+			);
+			path = MyFunc;
 			sourceTree = "<group>";
 		};
 		F8E43DA12C16361E0092CCE5 /* Helpers */ = {
