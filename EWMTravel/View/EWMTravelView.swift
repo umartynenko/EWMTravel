@@ -11,9 +11,18 @@ import MapKit
 import Combine
 import Firebase
 
+class ClusterAnnotation: NSObject, MKAnnotation {
+    dynamic var coordinate: CLLocationCoordinate2D
+    var title: String?
+    
+    init(coordinate: CLLocationCoordinate2D, title: String?) {
+        self.coordinate = coordinate
+        self.title = title
+    }
+}
 
 struct EWMTravelView: View {
-    @State private var camerPosition: MapCameraPosition = .region(.myRegion)
+    @State private var mapView = MKMapView()
     @State private var searchText: String = ""
     @State private var showSearch: Bool = false
     @State private var searchResults: [MKMapItem] = []
@@ -53,151 +62,23 @@ struct EWMTravelView: View {
     ]
     
     var body: some View {
-            NavigationStack {
-                VStack {
-                    if isMenuVisible {
-                        VStack {
-                            HStack {
-                                ForEach(nameEvents, id: \.0) { nameEvents in
-                                    Button(action: {
-                                        selectedActivityType = nameEvents.0
-                                    }) {
-                                        VStack {
-                                            Image(systemName: nameEvents.1)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(height: 24)
-                                                .font(.headline)
-                                                .padding()
-                                                .background(selectedActivityType == nameEvents.0 ? Color.blue : Color.gray)
-                                                .foregroundColor(.white)
-                                                .clipShape(Circle())
-                                            Text(nameEvents.2)
-                                                .font(.caption)
-                                                .foregroundColor(.primary)
-                                        }
-                                    }
-                                    .padding(.horizontal, 5)
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical)
-                            if selectedActivityType == "earthquakes" {
-                                HStack {
-                                    ForEach(timePeriodsForEarthquakes, id: \.0) { period in
-                                        Button(action: {
-                                            selectedTimePeriod = period.0
-                                            withAnimation {
-                                                isMenuVisible.toggle()
-                                            }
-                                        }) {
-                                            VStack {
-                                                Image(systemName: period.1)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(height: 24)
-                                                    .padding()
-                                                    .background(selectedTimePeriod == period.0 ? Color.blue : Color.gray)
-                                                    .foregroundColor(.white)
-                                                    .clipShape(Circle())
-                                                
-                                                Text(period.2)
-                                                    .font(.caption)
-                                                    .foregroundColor(.primary)
-                                            }
-                                        }
-                                        .padding(.horizontal, 5)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.vertical)
-                            } else if selectedActivityType == "fires" {
-                                HStack {
-                                    ForEach(timePeriodsForFire, id: \.0) { period in
-                                        Button(action: {
-                                            selectedTimePeriodForFire = period.0
-                                            withAnimation {
-                                                isMenuVisible.toggle()
-                                            }
-                                        }) {
-                                            VStack {
-                                                Image(systemName: period.1)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(height: 24)
-                                                    .padding()
-                                                    .background(
-                                                        selectedTimePeriodForFire == period.0 ? Color.blue : Color.gray
-                                                    )
-                                                    .foregroundColor(.white)
-                                                    .clipShape(Circle())
-                                                
-                                                Text(period.2)
-                                                    .font(.caption)
-                                                    .foregroundColor(.primary)
-                                            }
-                                        }
-                                        .padding(.horizontal, 5)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.vertical)
-                            }
-                        }
+        NavigationStack {
+            VStack {
+                if isMenuVisible {
+                    VStack {
+                        eventSelectionView
+                        timePeriodSelectionView
                     }
-                    
-                    Map(position: $camerPosition, selection: $mapSelection, scope: locatonSpace) {
-                        Marker("", systemImage: "smallcircle.filled.circle.fill", coordinate: .myLocation)
-                            .tint(.blue)
-                            .annotationTitles(.hidden)
-                        
-                        ForEach(searchResults.filter { isWithinViewingRegion($0.placemark.coordinate) }, id: \.self) { mapItem in
-                            let placemark = mapItem.placemark
-                            
-                            Marker(placemark.name ?? "Place", coordinate: placemark.coordinate)
-                                .tint(.blue)
-                        }
-                        
-                        ForEach(viewModel.seismicEvents.filter { isWithinViewingRegion($0.coordinate) }) { event in
-                            Annotation(String(event.title), coordinate: event.coordinate) {
-                                let magnitude = event.magnitude
-                                
-                                EarthquakeAnnotationView(magnitude: magnitude)
-                            }
-                        }
-                        
-                        ForEach(fireViewModel.fireData.filter { isWithinViewingRegion(CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)) }) { event in
-                            Annotation("\(event.latitude), \(event.longitude)", coordinate: CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)) {
-                                let frp = event.frp
-                                let markerSize = calculateMarkerSize(for: frp)
-                                
-                                FireAnnotationView(size: markerSize, level: event.confidence, scan: event.scan, track: event.track)
-                            }
-                        }
-                        UserAnnotation()
-                    }
+                }
+                
+                MapView(mapView: $mapView, searchResults: $searchResults, viewingRegion: $viewingRegion, viewModel: viewModel, fireViewModel: fireViewModel, selectedActivityType: $selectedActivityType, selectedTimePeriod: $selectedTimePeriod, selectedTimePeriodForFire: $selectedTimePeriodForFire)
                     .onMapCameraChange { ctx in
                         viewingRegion = ctx.region
                     }
                     .overlay(alignment: .bottomTrailing) {
-                        VStack(spacing: 15) {
-                            MapPitchToggle(scope: locatonSpace)
-                            MapUserLocationButton(scope: locatonSpace)
-                            Button {
-                                switchTypeMap()
-                            } label: {
-                                Image(systemName: standartType ? "map" : "map.fill")
-                                    .font(.system(size: 22))
-                                    .padding(10)
-                                    .background(Color("mapType").opacity(0.9))
-                                    .clipShape(Circle())
-                            }
-                        }
-                        .buttonBorderShape(.circle)
-                        .padding()
+                        bottomOverlayView
                     }
                     .mapScope(locatonSpace)
-//                    .mapStyle(.standard(elevation: .realistic))
                     .mapStyle(mapType)
                     .navigationTitle("EWMTravel")
                     .navigationBarTitleDisplayMode(.inline)
@@ -211,53 +92,174 @@ struct EWMTravelView: View {
                             .interactiveDismissDisabled(true)
                     }
                     .overlay(alignment: .topLeading) {
-                        Button(action: {
-                            withAnimation {
-                                isMenuVisible.toggle()
-                            }
-                        }) {
-                            Image(systemName: isMenuVisible ? "chevron.up.circle" : "chevron.down.circle")
-                                .font(.system(size: 35).weight(.light))
-                                .foregroundColor(.blue)
-                                .padding()
-                        }
+                        toggleMenuButton
+                    }
+            }
+        }
+        .onSubmit(of: .search) {
+            Task {
+                guard !searchText.isEmpty else { return }
+                searchResults = await searchPlaces(query: searchText, region: .myRegion)
+                mapSelection = nil
+            }
+        }
+        .preferredColorScheme(colorScheme)
+        .onChange(of: showSearch, initial: false) {
+            if (!showSearch) {
+                searchResults.removeAll(keepingCapacity: false)
+                showDetails = false
+            }
+        }
+        .onChange(of: mapSelection) { oldValue, newValue in
+            withAnimation(.snappy) {
+                showDetails = newValue != nil
+            }
+            Task {
+                lookAroundScene = await fetchLookAroundPreview(for: newValue!)
+            }
+        }
+        .onChange(of: selectedTimePeriod) {
+            viewModel.fetchSeismicData(for: selectedTimePeriod)
+        }
+        .onChange(of: selectedTimePeriodForFire) {
+            fireViewModel.loadFireData(interval: selectedTimePeriodForFire)
+        }
+        .onChange(of: selectedActivityType) { oldValue, newValue in
+            if newValue == "earthquakes" {
+                fireViewModel.fireData = []
+                selectedTimePeriodForFire = ""
+            } else {
+                viewModel.seismicEvents = []
+                selectedTimePeriod = ""
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var eventSelectionView: some View {
+        HStack {
+            ForEach(nameEvents, id: \.0) { nameEvents in
+                Button(action: {
+                    selectedActivityType = nameEvents.0
+                }) {
+                    VStack {
+                        Image(systemName: nameEvents.1)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 24)
+                            .font(.headline)
+                            .padding()
+                            .background(selectedActivityType == nameEvents.0 ? Color.blue : Color.gray)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                        Text(nameEvents.2)
+                            .font(.caption)
+                            .foregroundColor(.primary)
                     }
                 }
+                .padding(.horizontal, 5)
             }
-            .onSubmit(of: .search) {
-                Task {
-                    guard !searchText.isEmpty else { return }
-                    await searchPlaces()
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.vertical)
+    }
+    
+    @ViewBuilder
+    private var timePeriodSelectionView: some View {
+        if selectedActivityType == "earthquakes" {
+            HStack {
+                ForEach(timePeriodsForEarthquakes, id: \.0) { period in
+                    Button(action: {
+                        selectedTimePeriod = period.0
+                        withAnimation {
+                            isMenuVisible.toggle()
+                        }
+                    }) {
+                        VStack {
+                            Image(systemName: period.1)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 24)
+                                .padding()
+                                .background(selectedTimePeriod == period.0 ? Color.blue : Color.gray)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                            
+                            Text(period.2)
+                                .font(.caption)
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    .padding(.horizontal, 5)
                 }
             }
-            .preferredColorScheme(colorScheme)
-            .onChange(of: showSearch, initial: false) {
-                if (!showSearch) {
-                    searchResults.removeAll(keepingCapacity: false)
-                    showDetails = false
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical)
+        } else if selectedActivityType == "fires" {
+            HStack {
+                ForEach(timePeriodsForFire, id: \.0) { period in
+                    Button(action: {
+                        selectedTimePeriodForFire = period.0
+                        withAnimation {
+                            isMenuVisible.toggle()
+                        }
+                    }) {
+                        VStack {
+                            Image(systemName: period.1)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 24)
+                                .padding()
+                                .background(
+                                    selectedTimePeriodForFire == period.0 ? Color.blue : Color.gray
+                                )
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                            
+                            Text(period.2)
+                                .font(.caption)
+                                .foregroundColor(.primary)
+                        }
+                    }
+                    .padding(.horizontal, 5)
                 }
             }
-            .onChange(of: mapSelection) { oldValue, newValue in
-                withAnimation(.snappy) {
-                    showDetails = newValue != nil
-                }
-                fetchLookAroundPreview()
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical)
+        }
+    }
+    
+    @ViewBuilder
+    private var bottomOverlayView: some View {
+        VStack(spacing: 15) {
+            MapPitchToggle(scope: locatonSpace)
+            MapUserLocationButton(scope: locatonSpace)
+            Button {
+                switchTypeMap(standartType: &standartType, mapType: &mapType, colorScheme: &colorScheme)
+            } label: {
+                Image(systemName: standartType ? "map" : "map.fill")
+                    .font(.system(size: 22))
+                    .padding(10)
+                    .background(Color("mapType").opacity(0.9))
+                    .clipShape(Circle())
             }
-            .onChange(of: selectedTimePeriod) {
-                viewModel.fetchSeismicData(for: selectedTimePeriod)
+        }
+        .buttonBorderShape(.circle)
+        .padding()
+    }
+    
+    @ViewBuilder
+    private var toggleMenuButton: some View {
+        Button(action: {
+            withAnimation {
+                isMenuVisible.toggle()
             }
-            .onChange(of: selectedTimePeriodForFire) {
-                fireViewModel.loadFireData(interval: selectedTimePeriodForFire)
-            }
-            .onChange(of: selectedActivityType) { oldValue, newValue in
-                if newValue == "earthquakes" {
-                    fireViewModel.fireData = []
-                    selectedTimePeriodForFire = ""
-                } else {
-                    viewModel.seismicEvents = []
-                    selectedTimePeriod = ""
-                }
-            }
+        }) {
+            Image(systemName: isMenuVisible ? "chevron.up.circle" : "chevron.down.circle")
+                .font(.system(size: 35).weight(.light))
+                .foregroundColor(.blue)
+                .padding()
+        }
     }
     
     @ViewBuilder
@@ -267,25 +269,28 @@ struct EWMTravelView: View {
                 if (lookAroundScene == nil) {
                     ContentUnavailableView("Предварительный просмотр недоступен", systemImage: "eye.slash")
                 } else {
-                    LookAroundPreview(scene: $lookAroundScene)
+                    LookAroundPreview(initialScene: lookAroundScene!)
                 }
-            }
-            .frame(height: 200)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            .overlay(alignment: .topTrailing) {
+                
                 Button(action: {
                     showDetails = false
-                    withAnimation(.snappy) {
-                        mapSelection = nil
-                    }
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.title2)
+                        .font(.system(size: 35).weight(.light))
+                        .foregroundColor(.white)
+                        .background {
+                            Circle()
+                                .fill(Color.black)
+                        }
+                        .symbolRenderingMode(.palette)
                 }
-                .foregroundColor(.blue)
-                .padding(5)
-                .background(.ultraThickMaterial, in: Circle())
-                .padding(5)
+                .padding(6)
+            }
+            .background(alignment: .top) {
+                Rectangle()
+                    .fill(Color.black.gradient)
+                    .frame(height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
             }
             
             if let selectedPlace = mapSelection {
@@ -301,7 +306,6 @@ struct EWMTravelView: View {
                     
                     Button(action: {
                         showInMaps(selectedPlace)
-                        showInMaps(selectedPlace)
                     }) {
                         Image(systemName: "arrow.turn.up.right")
                             .font(.title3)
@@ -315,88 +319,137 @@ struct EWMTravelView: View {
         }
         .padding()
     }
-    
-    func searchPlaces() async {
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchText
-        request.region = .myRegion
-        let search = MKLocalSearch(request: request)
-        
-        do {
-            let response = try await search.start()
-            searchResults = response.mapItems
-            mapSelection = nil
-        } catch {
-            print("Error searching places: \(error.localizedDescription)")
-        }
-    }
-    
-    func fetchLookAroundPreview() {
-        guard let selectedPlace = mapSelection else { return }
-        
-        Task {
-            let request = MKLookAroundSceneRequest(mapItem: selectedPlace)
-            
-            do {
-                lookAroundScene = try await request.scene
-            } catch {
-                print("Error fetching Look Around scene: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func showInMaps(_ mapItem: MKMapItem) {
-        mapItem.openInMaps(launchOptions: [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
-        ])
-    }
-    
-    func isWithinViewingRegion(_ coordinate: CLLocationCoordinate2D) -> Bool {
-        guard let region = viewingRegion else { return false }
-        
-        let latDelta = region.span.latitudeDelta / 2.0
-        let lonDelta = region.span.longitudeDelta / 2.0
-        let minLat = region.center.latitude - latDelta
-        let maxLat = region.center.latitude + latDelta
-        let minLon = region.center.longitude - lonDelta
-        let maxLon = region.center.longitude + lonDelta
-        
-        return (minLat...maxLat).contains(coordinate.latitude) &&
-        (minLon...maxLon).contains(coordinate.longitude)
-    }
-    
-    func calculateMarkerSize(for frp: Double) -> CGFloat {
-        // Например, предположим, что размер маркера будет пропорционален FRP
-        // Чем выше значение FRP, тем больше маркер
-        let baseSize: CGFloat = 10  // Базовый размер маркера
-        let scaleFactor: CGFloat = 0.1  // Масштабный коэффициент, чтобы увеличить или уменьшить маркер в зависимости от FRP
-        
-        return baseSize + CGFloat(frp) * scaleFactor
-    }
-    
-    func switchTypeMap() {
-        if standartType {
-            mapType = .hybrid(elevation: .realistic)
-            standartType = false
-            colorScheme = .dark
-        } else {
-            mapType = .standard(elevation: .realistic)
-            standartType = true
-            colorScheme = .light
-        }
-    }
 }
-
 
 extension CLLocationCoordinate2D {
     static let myLocation = CLLocationCoordinate2D(latitude: 45.04703, longitude: 39.12763)
 }
 
-
 extension MKCoordinateRegion {
     static var myRegion: MKCoordinateRegion {
         return .init(center: .myLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
     }
+}
+
+struct MapView: UIViewRepresentable {
+    @Binding var mapView: MKMapView
+    @Binding var searchResults: [MKMapItem]
+    @Binding var viewingRegion: MKCoordinateRegion?
+    
+    @ObservedObject var viewModel: EarthquakeViewModel
+    @ObservedObject var fireViewModel: FireDataViewModel
+    
+    @Binding var selectedActivityType: String
+    @Binding var selectedTimePeriod: String
+    @Binding var selectedTimePeriodForFire: String
+    
+    class Coordinator: NSObject, MKMapViewDelegate {
+        var parent: MapView
+        
+        init(_ parent: MapView) {
+            self.parent = parent
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if let cluster = annotation as? MKClusterAnnotation {
+                var clusterView = mapView.dequeueReusableAnnotationView(withIdentifier: "cluster") as? MKMarkerAnnotationView
+                if (clusterView == nil) {
+                    clusterView = MKMarkerAnnotationView(annotation: cluster, reuseIdentifier: "cluster")
+                }
+                
+                clusterView?.markerTintColor = .blue
+                clusterView?.glyphText = "\(cluster.memberAnnotations.count)"
+                
+                return clusterView
+            } else if let annotation = annotation as? ClusterAnnotation {
+                var view = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKMarkerAnnotationView
+                if view == nil {
+                    view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                    view?.canShowCallout = true
+                }
+                view?.markerTintColor = .red
+                return view
+            }
+            return nil
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIView(context: Context) -> MKMapView {
+        mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "pin")
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "cluster")
+        return mapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.removeAnnotations(uiView.annotations)
+        
+        let annotations = searchResults.map { ClusterAnnotation(coordinate: $0.placemark.coordinate, title: $0.name) }
+        uiView.addAnnotations(annotations)
+        
+        let earthquakeAnnotations = viewModel.seismicEvents.map { ClusterAnnotation(coordinate: $0.coordinate, title: $0.title) }
+        uiView.addAnnotations(earthquakeAnnotations)
+        
+        let fireAnnotations = fireViewModel.fireData.map {
+                    ClusterAnnotation(
+                        coordinate: CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude),
+                        title: $0.satellite
+                    )
+                }
+        uiView.addAnnotations(fireAnnotations)
+        
+        if let region = viewingRegion {
+            uiView.setRegion(region, animated: true)
+        }
+    }
+}
+
+func switchTypeMap(standartType: inout Bool, mapType: inout MapStyle, colorScheme: inout ColorScheme) {
+    standartType.toggle()
+    if standartType {
+        mapType = .standard(elevation: .realistic)
+        colorScheme = .light
+    } else {
+        mapType = .imagery(elevation: .realistic)
+        colorScheme = .dark
+    }
+}
+
+func searchPlaces(query: String, region: MKCoordinateRegion) async -> [MKMapItem] {
+    let searchRequest = MKLocalSearch.Request()
+    searchRequest.naturalLanguageQuery = query
+    searchRequest.region = region
+    
+    let search = MKLocalSearch(request: searchRequest)
+    do {
+        let response = try await search.start()
+        return response.mapItems
+    } catch {
+        print("Error searching for places: \(error.localizedDescription)")
+        return []
+    }
+}
+
+func fetchLookAroundPreview(for mapItem: MKMapItem) async -> MKLookAroundScene? {
+    let request = MKLookAroundSceneRequest(mapItem: mapItem)
+    do {
+        let lookAroundScene = try await request.scene
+        return lookAroundScene
+    } catch {
+        print("Error fetching Look Around scene: \(error.localizedDescription)")
+        return nil
+    }
+}
+
+func showInMaps(_ mapItem: MKMapItem) {
+    mapItem.openInMaps(launchOptions: [
+        MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+    ])
 }
 
 
