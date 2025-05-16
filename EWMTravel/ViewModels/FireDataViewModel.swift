@@ -62,7 +62,7 @@ class FireDataViewModel: ObservableObject {
                     dayNight: String(columns[12])
                 )
                 
-                if fire.confidence == "low"{
+                if fire.confidence == "high" || fire.confidence == "low"{
                     if fire.brightness >= 300 && fire.frp >= 20 && fire.brightT31 >= 290 {
                         fireData.append(fire)
                     }
